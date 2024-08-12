@@ -4,16 +4,23 @@
     export let price;
     export let img;
     export let credit;
+    // import Cart from "$lib/Cart.svelte";
     // export let available;
 
-    // async function getCars() {
-    //     let shopData = await fetch(
-    //         "https://digitech.craighead.school.nz/api/car-hire",
-    //     );
-    //     return shopData.json();
-    // }
+    async function getCars() {
+        let shopData = await fetch(
+            "https://digitech.craighead.school.nz/api/car-hire",
+        );
+        return shopData.json();
+    }
 
-    // let current = cars[0];
+    // let cars = getCars();
+
+    let cart = [];
+
+    function addToCart(index) {
+        cart = [...cart, index];
+    }
 </script>
 
 <head>
@@ -36,7 +43,7 @@
         display: flex;
     }
     .info {
-        margin: 30px;
+        margin: 2px;
     }
     img {
         width: 400px;
