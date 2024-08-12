@@ -4,23 +4,6 @@
     export let price;
     export let img;
     export let credit;
-    // import Cart from "$lib/Cart.svelte";
-    // export let available;
-
-    async function getCars() {
-        let shopData = await fetch(
-            "https://digitech.craighead.school.nz/api/car-hire",
-        );
-        return shopData.json();
-    }
-
-    // let cars = getCars();
-
-    let cart = [];
-
-    function addToCart(index) {
-        cart = [...cart, index];
-    }
 </script>
 
 <head>
@@ -46,17 +29,25 @@
         margin: 2px;
     }
     img {
-        width: 400px;
+        width: 300px;
     }
 
     h2 {
-        color: #131415;
+        color: #171d23;
         font-family: "Audiowide", sans-serif;
-        font-weight: 500;
+        font-weight: 200;
         font-size: 1.6rem;
     }
 
     h3 {
-        color: #131415;
+        color: #171d23;
+        font-family: "Raleway", sans-serif;
+        font-weight: 500;
+    }
+
+    p {
+        color: #171d23b6;
+        font-family: "Raleway", sans-serif;
+        font-weight: 500;
     }
 </style>

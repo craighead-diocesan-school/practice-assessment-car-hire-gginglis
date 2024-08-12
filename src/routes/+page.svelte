@@ -15,9 +15,9 @@
   //
 
   let cart = [];
-
+  // starts the cart as an empty array
   let totalCost = 0;
-
+  // starts the cart's total cost as $0
   function calcTotalCost() {
     totalCost = 0;
     for (let car of cart) {
@@ -42,6 +42,12 @@
   }
 </script>
 
+<head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+  </style>
+</head>
+
 <Header />
 
 <main>
@@ -53,10 +59,6 @@
       {:then cars}
         {#each cars.fast as car}
           {#if car.available}
-            <button
-              on:click={() => addToCart(car)}
-              disabled={cart.length >= maxLength}>add to cart</button
-            >
             <Car
               car={car.car}
               description={car.description}
@@ -65,14 +67,14 @@
               credit={car.credit}
               available={car.available}
             />
+            <button
+              on:click={() => addToCart(car)}
+              disabled={cart.length >= maxLength}>add to cart</button
+            >
           {/if}
         {/each}
         {#each cars.nice as car}
           {#if car.available}
-            <button
-              on:click={() => addToCart(car)}
-              disabled={cart.length >= maxLength}>add to cart</button
-            >
             <Car
               car={car.car}
               description={car.description}
@@ -81,13 +83,18 @@
               credit={car.credit}
               available={car.available}
             />
+            <button
+              on:click={() => addToCart(car)}
+              disabled={cart.length >= maxLength}>add to cart</button
+            >
           {/if}
         {/each}
       {/await}
     </div>
 
     <div class="column">
-      <h2 class="title">Cart ${totalCost}</h2>
+      <h2 class="title">Cart</h2>
+      <h3>${totalCost}</h3>
       {#if cart.length >= 1}
         {#each cart as car, index}
           <p>
@@ -103,11 +110,11 @@
           <button
             on:click={() => {
               removeFromCart(index);
-            }}>-</button
+            }}>remove from cart</button
           >
         {/each}
       {:else}
-        <h3>your cart is empty</h3>
+        <p>your cart is empty</p>
       {/if}
     </div>
   </div>
@@ -116,3 +123,43 @@
 <footer>
   <p>&copy; Craighead Diocesan School 2024</p>
 </footer>
+
+<style>
+  button {
+    color: #171d23;
+    background-color: #171d234b;
+    border: solid #171d23 1.5px;
+    border-radius: 2px;
+    font-size: 1rem;
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    margin: 10px 10px 30px;
+  }
+  h3 {
+    color: #171d23;
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  h2 {
+    color: #171d23;
+    font-family: "Audiowide", sans-serif;
+    margin: 20px 10px;
+    font-weight: 500;
+    font-size: 1.7rem;
+  }
+  .column {
+    margin: 10px;
+  }
+  p {
+    color: #171d2380;
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+  }
+
+  button:disabled {
+    color: #171d239a;
+    background-color: #171d2320;
+    border: solid #171d239a 1.5px;
+  }
+</style>
