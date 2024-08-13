@@ -25,7 +25,7 @@
     }
   }
   const maxLength = 3;
-
+  // prevents the user from adding more than 3 cars to their cart
   function addToCart(car) {
     if (cart.length < maxLength) {
       cart = [...cart, car];
@@ -37,8 +37,10 @@
     const car = cart[index];
     if (car) {
       totalCost = totalCost - car.price;
+      // takes away the price of the removed car from the the total cost
     }
     cart = [...cart.slice(0, index), ...cart.slice(index + 1)];
+    // removes the car from the cart
   }
 </script>
 
@@ -55,10 +57,13 @@
     <div class="column">
       <h2 class="title">Available Cars</h2>
       {#await cars}
-        waiting...
+        loading...
+        <!-- displays a message while the array is being imported -->
       {:then cars}
         {#each cars.fast as car}
+          <!-- shows each car as a seperate object -->
           {#if car.available}
+            <!-- hides the unavailable cars -->
             <Car
               car={car.car}
               description={car.description}
@@ -71,6 +76,7 @@
               on:click={() => addToCart(car)}
               disabled={cart.length >= maxLength}>add to cart</button
             >
+            <!-- adds the car to the cart array and blocks the user from exceeding the maximum length of 3 cars -->
           {/if}
         {/each}
         {#each cars.nice as car}
@@ -112,9 +118,11 @@
               removeFromCart(index);
             }}>remove from cart</button
           >
+          <!-- removes the car from the cart array -->
         {/each}
       {:else}
         <p>your cart is empty</p>
+        <!-- displays a message when the cart array has no items -->
       {/if}
     </div>
   </div>
@@ -134,6 +142,7 @@
     font-family: "Raleway", sans-serif;
     font-weight: 600;
     margin: 10px 10px 30px;
+    transition: 0.25s;
   }
   h3 {
     color: #171d23;
@@ -156,10 +165,14 @@
     font-family: "Raleway", sans-serif;
     font-weight: 500;
   }
+  button:hover {
+    background-color: #171d237f;
+  }
 
   button:disabled {
     color: #171d239a;
     background-color: #171d2320;
     border: solid #171d239a 1.5px;
+    transition: 0.25s;
   }
 </style>
